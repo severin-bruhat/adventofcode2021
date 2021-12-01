@@ -4,21 +4,33 @@ def read_file(file):
     f.close()
     return depths
 
+# refactored version
 def part_1(file):
     depths = read_file(file)
 
-    idx = 0
-    cpt = 0
-    previous_value = 0
-
-    for depth in depths:
-        if idx > 0:
-            if depth > previous_value:
-                cpt += 1
-        previous_value = depth
-        idx = idx + 1
+    cpt = 0;
+    for i in range(len(depths)):
+        if depths[i - 1] < depths[i]:
+            cpt += 1
 
     print("Number of Increases: ", cpt)
+
+# dirty initial version
+# def part_1(file):
+#     depths = read_file(file)
+#
+#     idx = 0
+#     cpt = 0
+#     previous_value = 0
+#
+#     for depth in depths:
+#         if idx > 0:
+#             if depth > previous_value:
+#                 cpt += 1
+#         previous_value = depth
+#         idx = idx + 1
+#
+#     print("Number of Increases: ", cpt)
 
 
 print("PART 1")
