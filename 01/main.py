@@ -32,6 +32,19 @@ def part_1(file):
 #
 #     print("Number of Increases: ", cpt)
 
+def part_2(file):
+    depths = read_file(file)
+
+    cpt = 0;
+    for i in range(len(depths)):
+        if sum(depths[i:i+3]) < sum(depths[i+1:i+4]):
+            cpt += 1
+
+    print("Number of Increases: ", cpt)
+
 
 print("PART 1")
 part_1("input-day01.txt")
+
+print("PART 2")
+part_2("input-day01.txt")
