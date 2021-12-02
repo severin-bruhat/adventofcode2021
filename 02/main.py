@@ -14,7 +14,6 @@ def read_file(file):
     return commands
 
 
-# refactored version
 def part_1(file):
     command_entries = read_file(file)
     horizontal_value = 0
@@ -34,6 +33,29 @@ def part_1(file):
     print(res)
 
 
+def part_2(file):
+    command_entries = read_file(file)
+    horizontal_value = 0
+    debth = 0
+    aim = 0
+
+    for entry in command_entries:
+        direction, units = entry.split()
+        if direction == Command.DOWN.value:
+            aim += int(units)
+        elif direction == Command.UP.value:
+            aim -= int(units)
+        elif direction == Command.FORWARD.value:
+            horizontal_value += int(units)
+            debth += aim * int(units)
+
+    res = horizontal_value * debth
+
+    print(res)
+
+
 print("PART 1")
 part_1("input-day02.txt")
 
+print("PART 2")
+part_2("input-day02.txt")
