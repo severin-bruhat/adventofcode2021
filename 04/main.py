@@ -5,11 +5,12 @@ def read_file(file):
     return data
 
 
-def part_1(file):
-    bingo_data = read_file(file)
+def bingo(winner):
+    bingo_data = read_file("input-day04.txt")
     random_numbers = [int(n) for n in bingo_data[0].split(',')]
     bingo_cards = bingo_data[1:]
     win_idx = len(random_numbers)
+    lose_idx = -len(random_numbers)
     score = 0
 
     for card in bingo_cards:
@@ -43,16 +44,27 @@ def part_1(file):
                             if line == ["*", "*", "*", "*", "*"]:
                                 finished = True
 
-        if draw_idx < win_idx:
+        if winner == "me" and draw_idx < win_idx:
             win_idx = draw_idx
+            score = card_total * random_numbers[draw_idx]
+
+        if winner == "squid" and draw_idx > lose_idx:
+            lose_idx = draw_idx
             score = card_total * random_numbers[draw_idx]
 
     print(score)
 
 
+def part_1():
+    bingo("me")
+
+
+def part_2():
+    bingo("squid")
+
 print("PART 1")
-part_1("input-day04.txt") #expected output 54275
+part_1() #expected output 54275
 
 
-#print("PART 2")
-#print(part_2("input-day04.txt")) #expected output 13158
+print("PART 2")
+part_2() #expected output 13158
