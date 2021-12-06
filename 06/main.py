@@ -30,11 +30,12 @@ def part_2(file):
     lanternfishs = Counter(read_file(file)) #Counter({1: 207, 2: 26, 4: 24, 5: 22, 3: 21})
 
     for i in range(256):
-        count = lanternfishs[0]
+        count0 = lanternfishs[0]  # count the number of 0
+
         for i in range(8):
             lanternfishs[i] = lanternfishs[i + 1]
-        lanternfishs[8] = count
-        lanternfishs[6] += count
+        lanternfishs[8] = count0  # we add the new ones
+        lanternfishs[6] += count0  # all the 0 become 6
 
     return sum(lanternfishs.values())
 
