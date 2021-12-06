@@ -1,4 +1,6 @@
 from collections import Counter
+import time
+start_time = time.time()
 
 def read_file(file):
     with open(file, "r") as f:
@@ -43,3 +45,4 @@ print(part_1("input-day06.txt"))
 
 print("PART 2")
 print(part_2("input-day06.txt"))
+print("--- %s seconds ---" % (time.time() - start_time))
