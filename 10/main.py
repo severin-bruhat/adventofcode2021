@@ -6,25 +6,43 @@ def read_file(file):
 
 
 def part_1(file):
-    navigation_input = read_file(file)
+    input = read_file(file)
     pairs = {'(': ')', '[': ']', '{': '}', '<': '>'}
-    illegal_char_points = {')': 3, ']': 57, '}': 1197, '>': 25137}
+    scores = {')': 3, ']': 57, '}': 1197, '>': 25137}
+    result = 0
+    incomplete = []
 
-    error_score = 0
-
-    for line in navigation_input:
+    for line in input:
         chunks = []
-        for ch in line:
-            if ch in pairs:
-                chunks.append(ch)
+        for char in line:
+            if char in pairs:
+                chunks.append(char)
             else:
-                if ch != pairs[chunks.pop()]:
-                    error_score += illegal_char_points[ch]
+                if char != pairs[chunks.pop()]:
+                    result += scores[char]
                     chunks = []
                     break
+        if chunks:
+            incomplete.append(chunks)  # for part 2
+    return result, incomplete
 
-    return error_score
+
+def part_2(incomplete):
+    scores = {'(': 1, '[': 2, '{': 3, '<': 4}
+    result = []
+    for line in incomplete:
+        points = 0
+        for ch in reversed(line):
+            points = points * 5 + scores[ch]
+        result.append(points)
+    final = sorted(result)
+    return final[len(final) // 2]
 
 
 print("PART 1")
-print(part_1("input-day10.txt"))
+incomplete = part_1("input-day10.txt")[1]
+print(part_1("input-day10.txt")[0])
+
+
+print("PART 2")
+print(part_2(incomplete))
